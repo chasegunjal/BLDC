@@ -1,13 +1,15 @@
 #include <ps5.h>
 #include <ps5Controller.h>
 #include <ps5_int.h>
-
+#define freq 50
 #define ESC 23
 #define threshold_throttle 1122
+
 uint8_t trigger;
 int mapped_trigger;
 int throttle;
 int delay_low;
+int duty;
 
 
 void setup() {
@@ -18,22 +20,22 @@ void setup() {
     Serial.println("-------ps5 not connected---------");
   }
   Serial.println("-------ps5 connected---------");
+  ledcSetup(0,freq,16);
+  ledAttachPin(ESC, 0);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   trigger = ps5.R2();
-  BLDC(trigger);
-
+  trigger_BLDC(trigger);
+  duty_cycle();
+  ledWrite(0,duty);
 }
 
-void BLDC(uint8_t trigger){
+void trigger_BLDC(uint8_t trigger){
   mapped_trigger = map(trigger, 0,255,0,878);
   throttle = threshold_throttle + mapped_trigger;
-  delay_low = 20000 - throttle;
-
-  digitalWrite(ESC, HIGH);
-  delayMicroSeconds(throttle);
-  digitalWrite(ESC, LOW);
-  delayMicroSeconds(delay_low);
+}
+void duty_cycle(){
+  duty = throttle * 65536 / 20000;
 }
