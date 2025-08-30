@@ -1,6 +1,3 @@
-#include <ps5.h>
-#include <ps5Controller.h>
-#include <ps5_int.h>
 
 #define ESC 23
 #define threshold_throttle 1122
