@@ -3,8 +3,8 @@
 #include <ps5_int.h>
 
 #define ESC 23
-#define threshold_throttle 1122
-uint8_t trigger;
+int threshold_throttle 1122
+int trigger;
 int mapped_trigger;
 int throttle;
 int delay_low;
@@ -27,7 +27,7 @@ void loop() {
 
 }
 
-void BLDC(uint8_t trigger){
+void BLDC(int trigger){
   mapped_trigger = map(trigger, 0,255,0,878);
   throttle = threshold_throttle + mapped_trigger;
   delay_low = 20000 - throttle;
