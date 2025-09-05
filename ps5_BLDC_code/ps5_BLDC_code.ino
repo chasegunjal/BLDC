@@ -3,9 +3,9 @@
 #include <ps5_int.h>
 #define freq 50
 #define ESC 23
-#define threshold_throttle 1122
 
-uint8_t trigger;
+int threshold_throttle 1122
+int trigger;
 int mapped_trigger;
 int throttle;
 int delay_low;
@@ -32,7 +32,7 @@ void loop() {
   ledWrite(0,duty);
 }
 
-void trigger_BLDC(uint8_t trigger){
+void trigger_BLDC(int trigger){
   mapped_trigger = map(trigger, 0,255,0,878);
   throttle = threshold_throttle + mapped_trigger;
 }
