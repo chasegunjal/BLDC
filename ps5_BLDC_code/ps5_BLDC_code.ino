@@ -22,7 +22,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  trigger = ps5.R2();
+  trigger = ps5.R2Value();
   BLDC(trigger);
 
 }
