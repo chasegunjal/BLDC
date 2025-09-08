@@ -14,6 +14,7 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(ESC, OUTPUT);
   Serial.begin(115200);
+  ps5.begin("88:03:4C:93:FE:13");
   while(!ps5.isconnected()){
     Serial.println("-------ps5 not connected---------");
   }
