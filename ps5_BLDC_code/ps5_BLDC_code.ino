@@ -3,7 +3,7 @@
 #include <ps5_int.h>
 
 #define ESC 23
-int threshold_throttle 1122
+int threshold_throttle= 1122;
 int trigger;
 int mapped_trigger;
 int throttle;
@@ -15,7 +15,7 @@ void setup() {
   pinMode(ESC, OUTPUT);
   Serial.begin(115200);
   ps5.begin("88:03:4C:93:FE:13");
-  while(!ps5.isconnected()){
+  while(!ps5.isConnected()){
     Serial.println("-------ps5 not connected---------");
   }
   Serial.println("-------ps5 connected---------");
@@ -34,7 +34,7 @@ void BLDC(int trigger){
   delay_low = 20000 - throttle;
 
   digitalWrite(ESC, HIGH);
-  delayMicroSeconds(throttle);
+  delayMicroseconds(throttle);
   digitalWrite(ESC, LOW);
-  delayMicroSeconds(delay_low);
+  delayMicroseconds(delay_low);
 }
